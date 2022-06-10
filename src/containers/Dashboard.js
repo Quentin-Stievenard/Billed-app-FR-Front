@@ -114,6 +114,7 @@ export default class {
       $(".vertical-navbar").css({ height: "120vh" });
       this.counter++;
     }
+    e.stopImmediatePropagation();
     $("#icon-eye-d").click(this.handleClickIconEye);
     $("#btn-accept-bill").click((e) => this.handleAcceptSubmit(e, bill));
     $("#btn-refuse-bill").click((e) => this.handleRefuseSubmit(e, bill));
@@ -140,7 +141,6 @@ export default class {
   };
 
   handleShowTickets(e, bills, index) {
-    console.log("show", e);
     if (this.counter === undefined || this.index !== index) this.counter = 0;
     if (this.index === undefined || this.index !== index) this.index = index;
     if (this.counter % 2 === 0) {
@@ -154,11 +154,9 @@ export default class {
       $(`#status-bills-container${this.index}`).html("");
       this.counter++;
     }
-    console.log(this.counter);
 
     bills.forEach((bill) => {
       $(`#open-bill${bill.id}`).click((e) => {
-        console.log(e);
         this.handleEditTicket(e, bill, bills);
       });
     });
